@@ -47,18 +47,22 @@ export const InstanceForm: React.FC<InstanceFormProps> = ({ className, onSubmit,
   );
 
   return (
-    <div className={cx('InstanceForm', className)}>
-      <h2 className="InstanceForm__Title">MastodonサーバーのURLを指定する</h2>
-      <form className="InstanceForm__Content" action="#" onSubmit={callOnSubmit}>
+    <div className={cx('InstanceForm bg-white bg-white shadow-md rounded p-5', className)}>
+      <h2 className="InstanceForm__Title text-base font-bold mb-4">MastodonサーバーのURLを指定する</h2>
+      <form className="InstanceForm__Content grid gap-y-2 md:grid-cols-[1fr_auto]" action="#" onSubmit={callOnSubmit}>
         <input
-          className="InstanceForm__Input"
+          className="InstanceForm__Input block h-12 px-4 border border-solid border-gray-300 rounded md:rounded-tr-none md:rounded-br-none"
           type="text"
           name="domain"
           placeholder="例: mastodon.social"
           disabled={disabled}
           onInput={callOnInput}
         />
-        <button className="InstanceForm__Button" type="submit" disabled={disabled || inputText.length === 0}>
+        <button
+          className="InstanceForm__Button block w-32 h-12 text-white border-none rounded md:rounded-tl-none md:rounded-bl-none bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
+          type="submit"
+          disabled={disabled || inputText.length === 0}
+        >
           シェアする
         </button>
       </form>

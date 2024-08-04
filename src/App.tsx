@@ -69,9 +69,9 @@ export const App: React.FC = () => {
 
   return (
     <>
-      <div className="App">
-        <main className="App_Main">
-          <h1 className="Title">シェアするサーバーを選択</h1>
+      <div className="App h-full grid grid-rows-[1fr_auto] gap-5">
+        <main className="App_Main container max-w-3xl p-4 mx-auto flex flex-col justify-center gap-y-5">
+          <h1 className="Title text-base text-white font-bold">シェアするサーバーを選択</h1>
           <InstanceList
             instances={appStorage.data.instances}
             shareParameter={shareParameter}
@@ -79,10 +79,12 @@ export const App: React.FC = () => {
           />
           <InstanceForm onSubmit={addInstance} disabled={status === 'addInstanceNow'} />
         </main>
-        <footer className="App__Footer">
-          <ul>
+        <footer className="App__Footer p-4 text-sm">
+          <ul className="list-none flex justify-end gap-4">
             <li>
-              <button onClick={onClickAbout}>このページは？</button>
+              <button className="text-white hover:underline" onClick={onClickAbout}>
+                このページは？
+              </button>
             </li>
           </ul>
         </footer>

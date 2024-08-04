@@ -14,9 +14,15 @@ export const InstanceList: React.FC<InstanceListProps> = ({ className, instances
   if (instances.length === 0) return null;
 
   return (
-    <ul className={cx('InstanceList', className)}>
-      {instances.map((instance, i) => (
-        <InstanceItem instance={instance} shareParameter={shareParameter} onDestroy={onDestroy} key={instance.domain} />
+    <ul className={cx('InstanceList list-none bg-white shadow-md rounded p-2', className)}>
+      {instances.map((instance, i, arr) => (
+        <InstanceItem
+          className={cx(i === 0 ? '' : 'border-t border-gray-300')}
+          instance={instance}
+          shareParameter={shareParameter}
+          onDestroy={onDestroy}
+          key={instance.domain}
+        />
       ))}
     </ul>
   );

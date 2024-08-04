@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #85e;
+  background: linear-gradient(to right bottom, #85e, #47e);
+  color: #333;
+}
+
+a {
+  color: #47e;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
