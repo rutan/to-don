@@ -1,0 +1,37 @@
+{
+  "name": "ru-react-sandbox",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite preview",
+    "dev": "vite",
+    "build": "run-s lint clean build:*",
+    "build:vite": "cross-env NODE_ENV=production vite build",
+    "lint": "run-s lint:*",
+    "lint:prettier": "prettier --check \"./src/**/*.{html,js,jsx,ts,tsx,json,css,scss}\"",
+    "lint:tsc": "tsc --noEmit",
+    "format": "run-s format:*",
+    "format:prettier": "prettier --write \"./**/*.{html,js,jsx,ts,tsx,json,css,scss}\"",
+    "clean": "rimraf ./dist"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.1.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.2.1",
+    "ress": "^5.0.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "sass": "^1.77.8",
+    "typescript": "^5.5.4",
+    "vite": "^5.3.5"
+  }
+}
