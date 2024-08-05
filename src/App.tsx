@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useAppStorage, useShareParameter } from './hooks';
-import { AboutModal, InstanceForm, InstanceList, LoadingModal } from './components';
+import { AboutContent, AboutModal, InstanceForm, InstanceList, LoadingModal, SampleShare } from './components';
 import { fetchInstance, generateShareUrl } from './utils';
 import { Instance, instanceSchema } from './schema';
 
@@ -63,35 +63,44 @@ export const App: React.FC = () => {
     setStatus('active');
   }, []);
 
-  if (appStorage.loading) {
+  // ロード中表示
+  if (appStorage.loading || shareParameter === null) {
     return null;
   }
 
   return (
     <>
       <div className="App h-full grid grid-rows-[1fr_auto] gap-5">
-        <main className="App_Main container max-w-3xl p-4 mx-auto flex flex-col justify-center gap-y-5">
-          <h1 className="Title text-base text-white font-bold">シェアするサーバーを選択</h1>
-          <InstanceList
-            instances={appStorage.data.instances}
-            shareParameter={shareParameter}
-            onDestroy={removeInstance}
-          />
-          <InstanceForm onSubmit={addInstance} disabled={status === 'addInstanceNow'} />
-        </main>
-        <footer className="App__Footer p-4 text-sm">
-          <ul className="list-none flex justify-end gap-4">
-            <li>
-              <button className="text-white hover:underline" onClick={onClickAbout}>
-                このページは？
-              </button>
-            </li>
-          </ul>
-        </footer>
+        {shareParameter.text || shareParameter.url ? (
+          <>
+            <main className="App_Main container max-w-3xl p-4 mx-auto flex flex-col justify-center gap-y-5">
+              <h1 className="Title text-base text-white font-bold">シェアするサーバーを選択</h1>
+              <InstanceList
+                instances={appStorage.data.instances}
+                shareParameter={shareParameter}
+                onDestroy={removeInstance}
+              />
+              <InstanceForm onSubmit={addInstance} disabled={status === 'addInstanceNow'} />
+            </main>
+            <footer className="App__Footer p-4 text-sm">
+              <ul className="list-none flex justify-end gap-4">
+                <li>
+                  <button className="text-white hover:underline" onClick={onClickAbout}>
+                    このページは？
+                  </button>
+                </li>
+              </ul>
+            </footer>
+            <AboutModal isOpen={status === 'showAbout'} onClose={onCloseOverlay} />
+            {status === 'addInstanceNow' && <LoadingModal />}
+          </>
+        ) : (
+          <main className="App_Main container max-w-3xl p-4 mx-auto flex flex-col justify-center gap-y-5">
+            <AboutContent className="bg-white shadow-md rounded p-4" />
+            <SampleShare className="bg-white shadow-md rounded p-4" />
+          </main>
+        )}
       </div>
-
-      <AboutModal isOpen={status === 'showAbout'} onClose={onCloseOverlay} />
-      {status === 'addInstanceNow' && <LoadingModal />}
     </>
   );
 };
